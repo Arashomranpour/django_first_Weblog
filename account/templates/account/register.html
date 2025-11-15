@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Form</title>
+    <link rel="stylesheet" href="{% static 'account/style.css' %}">
+</head>
+<body>
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h2>Sign Up</h2>
+            <p>Enter your credentials to Create An Account</p>
+        </div>
+
+        <form class="login-form" id="loginForm" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            {% if errors %}
+                {% for item in errors %}
+                    <p class="text text-danger bg-white rounded">{{ item }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input type="email" id="email" name="email" required>
+                    <label for="email">Enter Email</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input type="text" id="username" name="username" required>
+                    <label for="username">Enter Username</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input type="number" id="nationalcode" name="nationalcode" required>
+                    <label for="nationalcode">Enter National Code</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input type="password" id="password2" name="password2" required autocomplete="current-password">
+                    <label for="password2">Repeat Password</label>
+                </div>
+            </div>
+
+            <!-- ✅ Add profile picture upload -->
+            <div class="form-group">
+                <label for="image" class="text-secondary">Profile Picture (optional)</label>
+                <input type="file" id="image" name="image" accept="image/*" class="form-control">
+            </div>
+
+            <div class="signup-link">
+                <p>Have an account? <a href="{% url 'account_app:login' %}">Login</a></p>
+                <hr/>
+            </div>
+
+            <button type="submit" class="login-btn">
+                <span class="btn-text">Sign Up For Free</span>
+            </button>
+        </form>
+
+    </div>
+</div>
+{% comment %} 
+    <script src="{% static 'account/utils.js' %}"></script>
+    <script src="{% static 'account/script.js' %} "></script> {% endcomment %}
+</body>
+</html>
